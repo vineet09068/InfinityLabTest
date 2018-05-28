@@ -1,0 +1,51 @@
+<div *ngIf="peginationId==1">
+    <table>
+        <tr>
+            <td *ngFor="let col of gridColumns" style="width:20%;">
+                {{col.colName}}
+            </td>
+            <td style="width:300px;padding-left:50px;">Action</td>
+        </tr>
+        <tr *ngFor="let colObj of girdData | paginate: {itemsPerPage: 5, currentPage:page, id: '1'}; ">
+            <td *ngFor="let col of gridColumns">
+                 {{colObj[col.colName]}}
+            </td>
+            <td style="width:300px;"><button class="btn-primary" (click)="SelectedRow(colObj)">Select</button>
+                <button class="btn-primary" (click)="DeleteRow(colObj)">Delete</button>
+                <button class="btn-primary" *ngIf="shouldView" (click)="ViewRow(colObj)" >View</button></td>
+        </tr>
+    </table>
+    <pagination-controls (pageChange)="page = $event" id="1"
+                          maxSize="5"
+                          directionLinks="true"
+                          autoHide="true">
+                    </pagination-controls>
+    
+     
+</div>
+<div *ngIf="peginationId==2">
+    <table>
+        <tr>
+            <td *ngFor="let col of gridColumns" style="width:20%;">
+                {{col.colName}}
+            </td>
+            <td style="width:300px;padding-left:50px;">Action</td>
+        </tr>
+        <tr *ngFor="let colObj of girdData | paginate: {itemsPerPage: 5, currentPage:page, id: '2'}; ">
+            <td *ngFor="let col of gridColumns">
+                 {{colObj[col.colName]}}
+            </td>
+            <td style="width:300px;"><button class="btn-primary" (click)="SelectedRow(colObj)">Select</button>
+                <button class="btn-primary" (click)="DeleteRow(colObj)">Delete</button>
+                <button  class="btn-primary" *ngIf="shouldView" (click)="ViewRow(colObj)" >View</button></td>
+        </tr>
+    </table>
+    <pagination-controls (pageChange)="page = $event" id="2"
+                          maxSize="5"
+                          directionLinks="true"
+                          autoHide="true">
+                    </pagination-controls>
+    
+    
+
+</div>

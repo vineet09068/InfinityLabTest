@@ -1,0 +1,53 @@
+<div [className]='deviceClass'><form #deviceForm="ngForm" >
+    <table>
+        <tr><td>HostName:</td><td>LoopBack:</td><td></td></tr>
+        <tr><td>
+            <input type="text" required [(ngModel)]="CurrentDevice.HostName" (keydown)="DeviceMessage='';isModify=true; " name ="HostName"
+            pattern = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$"
+ #HostName="ngModel" >
+        </td> 
+            <td>
+                <input type="text" required [(ngModel)]="CurrentDevice.LoopBack" (keydown)="DeviceMessage='';isModify=true;" name="LoopBack" 
+                pattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                 #LoopBack="ngModel">
+            </td>
+        <td><input type="submit" value="Add"  class="btn-primary" (click)="Add()" [disabled]="!deviceForm.form.valid" /></td>
+        </tr>
+    </table>
+    <br/>
+     <div class="alert-success" style="width: 631px;padding-left: 70px;"> {{DeviceMessage}}</div>
+    <br/>
+    <div *ngIf="HostName.errors && (HostName.dirty || HostName.touched) && isModify" 
+    style="width: 631px;"  class="alert alert-danger">
+            <div [hidden]="!HostName.errors.required ">
+                    HostName is required!
+            </div>
+            <div [hidden]="!HostName.errors.pattern">
+                    HostName parttern is not correct. 
+            </div>
+            
+      </div>
+      <div *ngIf="LoopBack.errors && (LoopBack.dirty || LoopBack.touched) && isModify" 
+      style="width: 631px;" class="alert alert-danger">
+            <div [hidden]="!LoopBack.errors.required">
+                    LoopBack is required!
+            </div>
+            <div [hidden]="!LoopBack.errors.pattern">
+                    LoopBack parttern is not correct. 
+            </div>
+            
+      </div>
+</form>
+<br/>
+<br/>
+<br/>
+    <grid-ui 
+    [grid-columns]="DeviceColArr" 
+    [pegination-id]="1"
+    [grid-data]="Devices"  [ViewButton]="true"
+    (grid-selected)="SelectedRow($event)"></grid-ui>
+
+</div>
+  <div *ngIf="interfaceShow"><device-interface-ui (should-Hide)="Hide($event)" (update-interface)="UpdateInterface($event)"> </device-interface-ui></div>
+    
+    

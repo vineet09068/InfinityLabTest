@@ -1,0 +1,67 @@
+
+<div class="deviceInterface">
+        <table><tr><td><h2>EDIT INTERFACES</h2> </td>
+                <td><button type="button" style="margin-left: 430px;" class="close" aria-label="Close" (click)="Hide()">
+                        <span aria-hidden="true">&times;</span>
+                      </button></td>
+                
+                </tr></table>
+                <hr>
+        
+        
+<form #deviceInterfaceForm="ngForm" >
+        <table>
+                <tr><td>Interface:</td><td>IP:</td><td></td>
+                </tr>
+    <tr>
+        <td> <input type="text" [(ngModel)]="CurrentDeviceInterface.Interface" (keydown)="DeviceInterfaceMessage='';isModify=true"
+            required name="Interface" #Interface="ngModel" >
+        </td>
+        <td>
+             <input type="text" required [(ngModel)]="CurrentDeviceInterface.IP"  (keydown)="DeviceInterfaceMessage='';isModify=true"
+             pattern = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+             name="IP" #IP="ngModel"
+             >
+        </td>
+        <td><input class="btn-primary" type="submit" value="Add" (click)="Add()" [disabled]="!deviceInterfaceForm.form.valid" /></td>
+    </tr>
+       </table>
+       <br/>
+       <div class="alert-success" style="width: 563px;padding-left: 70px;"> {{DeviceInterfaceMessage}}</div>
+       <br/>
+       <div *ngIf="Interface.errors && (Interface.dirty || Interface.touched) && isModify" 
+       style="width: 563px;" class="alert alert-danger">
+            <div [hidden]="!Interface.errors.required">
+                    Interface is required!
+            </div>          
+      </div>
+      <div *ngIf="IP.errors && (IP.dirty || IP.touched) && isModify" 
+      style="width: 563px;" class="alert alert-danger">
+            <div [hidden]="!IP.errors.required">
+                    IP is required!
+            </div>
+            <div [hidden]="!IP.errors.pattern">
+                    IP parttern is not correct. 
+            </div>
+            
+      </div>
+
+    </form>
+        <grid-ui 
+        [grid-columns]="DeviceInterfaceColArr" 
+        [grid-data]="DeviceInterfaces" 
+        [pegination-id]="2"
+        (grid-selected)="SelectedRow($event)"
+        ></grid-ui>
+        <br><br/>
+       <table>
+               <tr>
+                       <td><button class="btn-primary" value="Save" style="margin-left:450px;" (click)="Hide()">Save</button></td>
+                       <td><button class="btn-primary" value="Close"  (click)="Hide()">Close</button></td>
+
+               </tr>
+       </table> 
+        
+        </div>
+
+        
