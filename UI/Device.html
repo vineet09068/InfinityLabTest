@@ -3,8 +3,7 @@
         <tr><td>HostName:</td><td>LoopBack:</td><td></td></tr>
         <tr><td>
             <input type="text" required [(ngModel)]="CurrentDevice.HostName" (keydown)="DeviceMessage='';isModify=true; " name ="HostName"
-            pattern = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$"
- #HostName="ngModel" >
+            pattern = "^([a-zA-Z0-9]+\.)*[a-zA-Z0-9]+\.[a-zA-Z][a-zA-Z]+$" #HostName="ngModel" >
         </td> 
             <td>
                 <input type="text" required [(ngModel)]="CurrentDevice.LoopBack" (keydown)="DeviceMessage='';isModify=true;" name="LoopBack" 
